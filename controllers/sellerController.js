@@ -1,3 +1,4 @@
+const express = require('express');
 const bcrypt = require('bcrypt');
 const Seller = require('../models/sellerSchema.js');
 const { createNewToken } = require('../utils/token.js');
@@ -9,7 +10,8 @@ const sellerRegister = async (req, res) => {
 
         const seller = new Seller({
             ...req.body,
-            password: bcrypt.hash
+            // hashedPass already stores bcrypt.hash
+            password: hashedPass
         });
 
         const existingSellerByEmail = await Seller.findOne({ email: req.body.email });
@@ -29,6 +31,7 @@ const sellerRegister = async (req, res) => {
 
             result = {
                 ...result._doc,
+                // token needs to be used
                 token: token
             };
 
@@ -51,7 +54,7 @@ const sellerLogIn = async (req, res) => {
 
                 seller = {
                     ...seller._doc,
-                    token: tokens
+                    token: token
                 };
 
                 res.send(seller);
@@ -65,5 +68,5 @@ const sellerLogIn = async (req, res) => {
         res.send({ message: "Email and password are required" });
     }
 };
-
+// added module.exports instead of moduleexports
 module.exports = { sellerRegister, sellerLogIn };

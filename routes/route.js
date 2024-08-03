@@ -4,7 +4,8 @@ const authMiddleware = require('../middleware/authMiddleware.js');
 const {
     sellerRegister,
     sellerLogIn
-} = require('../controllers/orderController.js');
+    // instead of orderController it should be sellerController
+} = require('../controllers/sellerController.js');
 
 const {
     productCreate,
@@ -35,11 +36,12 @@ const {
 } = require('../controllers/orderController.js');
 
 
-// Seller
+
 router.post('/SellerRegister', sellerRegister);
+
 router.post('/SellerLogin', sellerLogIn);
 
-// Product
+// // Product
 router.post('/ProductCreate', productCreate);
 router.get('/getSellerProducts/:id', getSellerProducts);
 router.get('/getProducts', getProducts);
@@ -69,3 +71,5 @@ router.put('/CustomerUpdate/:id', cartUpdate);
 router.post('/newOrder', newOrder);
 router.get('/getOrderedProductsByCustomer/:id', getOrderedProductsBySeller);
 router.get('/getOrderedProductsBySeller/:id', getOrderedProductsBySeller);
+// added export
+module.exports = router;

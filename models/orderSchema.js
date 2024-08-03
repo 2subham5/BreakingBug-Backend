@@ -116,5 +116,5 @@ const orderSchema = new mongoose.Schema(
             default: Date.now,
         },
     });
-
-module.exports = mongoose.model("customer", orderSchema);
+// it needs to be order not customer
+module.exports = mongoose.model("order", orderSchema);
